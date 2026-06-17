@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sizzler Daily Operating Guide</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #0A0E1A; color: #E8F4FD; min-height: 100vh; padding-bottom: 60px; }
+    .wrap { max-width: 860px; margin: 0 auto; }
+
+    .header { background: linear-gradient(135deg, #0A2A4A, #0A0E1A); padding: 18px 24px 14px; border-bottom: 1px solid #1E3A5F; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+    .header h1 { font-size: 1.4rem; font-weight: 700; color: #00D4FF; text-shadow: 0 0 20px #00D4FF55; margin-bottom: 4px; }
+    .header p { font-size: 0.85rem; color: #8899AA; font-style: italic; }
+    .header-badge { background: #111827; border: 1px solid #1E3A5F; border-radius: 8px; padding: 8px 14px; text-align: center; }
+    .header-badge .label { font-size: 0.68rem; color: #8899AA; text-transform: uppercase; letter-spacing: 0.3px; }
+    .header-badge .value { font-size: 0.85rem; font-weight: 700; color: #00FF88; margin-top: 2px; }
+
+    .body { padding: 20px; }
+
+    /* Habit loop */
+    .loop { background: linear-gradient(135deg, #0A2A4A, #111827); border: 1px solid #00D4FF44; border-radius: 8px; padding: 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
+    .loop-step { background: rgba(0,212,255,0.1); border: 1px solid #00D4FF44; color: #E8F4FD; border-radius: 6px; padding: 8px 14px; font-size: 0.82rem; font-weight: 700; text-align: center; }
+    .loop-step .step-num { display: block; font-size: 0.68rem; color: #00D4FF; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.3px; }
+    .loop-arrow { color: #1E3A5F; font-size: 1.2rem; flex-shrink: 0; }
+
+    /* Tool cards */
+    .tool-card { background: #111827; border: 1px solid #1E3A5F; border-radius: 8px; overflow: hidden; margin-bottom: 14px; }
+    .tool-header { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .tool-title { font-size: 1rem; font-weight: 700; color: white; }
+    .tool-tagline { font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+    .tool-when { background: rgba(255,255,255,0.15); color: white; border-radius: 20px; padding: 3px 12px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; }
+    .tool-body { padding: 14px 16px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .tool-link { display: inline-block; font-size: 0.78rem; color: #00D4FF; text-decoration: none; font-weight: 700; border: 1px solid #00D4FF44; padding: 4px 10px; border-radius: 5px; margin-bottom: 12px; }
+    .tool-link:hover { background: #00D4FF; color: #0A0E1A; }
+
+    .step-list { list-style: none; padding: 0; }
+    .step-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; line-height: 1.5; color: #E8F4FD; }
+    .step-item:last-child { border-bottom: none; }
+    .step-num-circle { width: 22px; height: 22px; border-radius: 50%; color: #0A0E1A; font-size: 0.68rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+    /* Rhythm */
+    .rhythm-card { background: #111827; border: 1px solid #1E3A5F; border-left: 3px solid #48CAE4; border-radius: 0 8px 8px 0; padding: 14px 16px; margin-bottom: 14px; }
+    .rhythm-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: #8899AA; margin-bottom: 10px; }
+    .rhythm-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid #1E3A5F; font-size: 0.85rem; }
+    .rhythm-row:last-child { border-bottom: none; }
+    .rhythm-tag { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; background: #0A2A3A; color: #00D4FF; border: 1px solid #00D4FF44; min-width: 82px; text-align: center; flex-shrink: 0; }
+
+    /* Lane rule */
+    .rule-card { background: #2A0A0A; border-left: 4px solid #FF6B6B; border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 14px; }
+    .rule-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: #FF6B6B; margin-bottom: 8px; }
+    .rule-text { font-size: 0.85rem; color: #E8F4FD; line-height: 1.7; }
+
+    .footer { text-align: center; padding: 20px; font-size: 0.72rem; color: #1E3A5F; border-top: 1px solid #1E3A5F; margin-top: 10px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div>
+      <h1>Sizzler Daily Operating Guide</h1>
+      <p>Wave, Road & Everything Between · v1.0 · June 2026</p>
+    </div>
+    <div class="header-badge">
+      <div class="label">Status</div>
+      <div class="value">● All systems live</div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- Habit loop -->
+    <div class="loop">
+      <div class="loop-step"><span class="step-num">Step 1</span>CHECK IN<br><span style="font-size:0.72rem;font-weight:400;color:#8899AA">Control Centre</span></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step"><span class="step-num">Step 2</span>BUILD<br><span style="font-size:0.72rem;font-weight:400;color:#8899AA">Jarvis V3</span></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step"><span class="step-num">Step 3</span>LOG<br><span style="font-size:0.72rem;font-weight:400;color:#8899AA">Builder's Log</span></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step"><span class="step-num">Step 4</span>REPEAT<br><span style="font-size:0.72rem;font-weight:400;color:#8899AA">Next session</span></div>
+    </div>
+
+    <!-- Control Centre -->
+    <div class="tool-card">
+      <div class="tool-header" style="background:#0077B6">
+        <div><div class="tool-title">Control Centre</div><div class="tool-tagline">Your session ignition switch — start here every time</div></div>
+        <div class="tool-when">Session START</div>
+      </div>
+      <div class="tool-body">
+        <a href="https://sizzler-controlcentre.vercel.app/" target="_blank" class="tool-link">Open Control Centre →</a>
+        <ul class="step-list">
+          <li class="step-item"><span class="step-num-circle" style="background:#0077B6">1</span>Open Control Centre — this is your FIRST action every session</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#0077B6">2</span>Type your single lane focus in the Check Me In box</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#0077B6">3</span>Click "Check Me In" — lane locked, session starts</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#0077B6">4</span>Review build queue — confirm today's priority is correct</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#0077B6">5</span>Check agent roster — know what's active and what's next</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Jarvis V3 -->
+    <div class="tool-card">
+      <div class="tool-header" style="background:#FF6B6B">
+        <div><div class="tool-title">Jarvis V3</div><div class="tool-tagline">Your command centre — run your session from here</div></div>
+        <div class="tool-when">DURING Session</div>
+      </div>
+      <div class="tool-body">
+        <a href="https://sizzler-jarvis-v3.vercel.app/" target="_blank" class="tool-link">Open Jarvis V3 →</a>
+        <ul class="step-list">
+          <li class="step-item"><span class="step-num-circle" style="background:#FF6B6B">1</span>Today tab — lock your single lane focus, tick off checklist</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#FF6B6B">2</span>Ideas tab — capture any idea the moment it surfaces</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#FF6B6B">3</span>Weekly tab — check rhythm, update review or plan if needed</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#FF6B6B">4</span>Org Chart — reference agent hierarchy when planning next build</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#FF6B6B">5</span>Lane drift? Pause — park it in Ideas, stay in the single lane</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Builder's Log -->
+    <div class="tool-card">
+      <div class="tool-header" style="background:#48CAE4">
+        <div><div class="tool-title" style="color:#0A0E1A">Builder's Log</div><div class="tool-tagline" style="color:rgba(0,0,0,0.6)">Your IP record — log every session before you close</div></div>
+        <div class="tool-when" style="background:rgba(0,0,0,0.15);color:#0A0E1A">Session END</div>
+      </div>
+      <div class="tool-body">
+        <a href="https://sizzler-builderslog-3zno.vercel.app/" target="_blank" class="tool-link">Open Builder's Log →</a>
+        <ul class="step-list">
+          <li class="step-item"><span class="step-num-circle" style="background:#48CAE4;color:#0A0E1A">1</span>Click "+ Log This Session" — do this BEFORE closing anything</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#48CAE4;color:#0A0E1A">2</span>Enter session focus — what was the single lane today?</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#48CAE4;color:#0A0E1A">3</span>What was built — describe what you completed</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#48CAE4;color:#0A0E1A">4</span>Problems solved — what did you work through?</li>
+          <li class="step-item"><span class="step-num-circle" style="background:#48CAE4;color:#0A0E1A">5</span>Git commit reference — paste for IP timestamping</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Weekly rhythm -->
+    <div class="rhythm-card">
+      <div class="rhythm-title">Weekly Rhythm</div>
+      <div class="rhythm-row"><span class="rhythm-tag">Monday</span>Production plan + single lane lock</div>
+      <div class="rhythm-row"><span class="rhythm-tag">Tuesday</span>GoPro / content capture session</div>
+      <div class="rhythm-row"><span class="rhythm-tag">Wednesday</span>Buffer + travel prep</div>
+      <div class="rhythm-row"><span class="rhythm-tag">Thursday</span>Flex / travel day</div>
+      <div class="rhythm-row"><span class="rhythm-tag">Friday</span>End-of-week honest review</div>
+      <div class="rhythm-row"><span class="rhythm-tag">Weekend</span>Ocean + rest + recharge 🌊</div>
+    </div>
+
+    <!-- Lane rule -->
+    <div class="rule-card">
+      <div class="rule-title">The Lane Rule</div>
+      <div class="rule-text">One focus per session. If a new idea surfaces — park it in Jarvis Ideas tab. Never break the lane. The 2-hour rule is hard. 90-minute flag, hard stop at 2 hours. No exceptions.</div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Sizzler Daily Operating Guide v1.0 · June 2026 · @sizzlerwaveandroad<br>
+    Check In → Build → Log → Repeat
+  </div>
+
+</div>
+</body>
+</html>
