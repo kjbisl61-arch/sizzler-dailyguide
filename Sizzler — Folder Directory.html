@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)file:///C:/Users/kjbis/Downloads/FolderDirectory.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sizzler — Folder Directory</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #0A0E1A; color: #E8F4FD; min-height: 100vh; padding-bottom: 60px; }
+    .wrap { max-width: 960px; margin: 0 auto; }
+
+    .header { background: linear-gradient(135deg, #0A2A4A, #0A0E1A); padding: 18px 24px 14px; border-bottom: 1px solid #1E3A5F; }
+    .header h1 { font-size: 1.4rem; font-weight: 700; color: #00D4FF; text-shadow: 0 0 20px #00D4FF55; margin-bottom: 4px; }
+    .header p { font-size: 0.85rem; color: #8899AA; font-style: italic; }
+
+    .body { padding: 20px; }
+
+    /* Root link */
+    .root-link { display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #0A2A4A, #111827); border: 1px solid #00D4FF44; border-left: 4px solid #00D4FF; border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 20px; text-decoration: none; color: #E8F4FD; }
+    .root-link:hover { border-left-color: #00FF88; }
+    .root-link .root-name { font-size: 1rem; font-weight: 700; color: #00D4FF; }
+    .root-link .root-desc { font-size: 0.78rem; color: #8899AA; margin-top: 2px; }
+
+    /* Folder section */
+    .folder-section { margin-bottom: 16px; }
+    .folder-header { display: flex; align-items: center; gap: 10px; background: #111827; border: 1px solid #1E3A5F; border-radius: 8px 8px 0 0; padding: 10px 16px; text-decoration: none; color: #E8F4FD; border-bottom: none; }
+    .folder-header:hover { background: #0A2A3A; }
+    .folder-num { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: #0A0E1A; flex-shrink: 0; }
+    .folder-name { font-size: 0.9rem; font-weight: 700; flex: 1; }
+    .folder-desc { font-size: 0.72rem; color: #8899AA; }
+    .open-btn { font-size: 0.7rem; color: #00D4FF; border: 1px solid #00D4FF44; padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+
+    /* File list */
+    .file-list { background: #0D1420; border: 1px solid #1E3A5F; border-radius: 0 0 8px 8px; padding: 4px 0; }
+    .file-item { display: flex; align-items: center; gap: 10px; padding: 7px 16px 7px 44px; border-bottom: 1px solid #1E3A5F; text-decoration: none; color: #8899AA; font-size: 0.82rem; }
+    .file-item:last-child { border-bottom: none; }
+    .file-item:hover { color: #00D4FF; background: #0A1A2A; }
+    .file-icon { font-size: 0.85rem; flex-shrink: 0; }
+    .file-name { flex: 1; }
+    .file-tag { font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 10px; flex-shrink: 0; }
+
+    /* Subfolder */
+    .subfolder { margin: 0; }
+    .subfolder-header { display: flex; align-items: center; gap: 8px; padding: 7px 16px 7px 28px; border-bottom: 1px solid #1E3A5F; text-decoration: none; color: #8899AA; font-size: 0.82rem; background: #0A0E1A; }
+    .subfolder-header:hover { color: #00D4FF; background: #0A1A2A; }
+    .subfolder-name { font-weight: 700; color: #48CAE4; }
+    .subfolder-file { display: flex; align-items: center; gap: 10px; padding: 6px 16px 6px 56px; border-bottom: 1px solid #1E3A5F; text-decoration: none; color: #666; font-size: 0.78rem; }
+    .subfolder-file:last-child { border-bottom: none; }
+    .subfolder-file:hover { color: #00D4FF; background: #0A1A2A; }
+
+    .empty-note { padding: 8px 16px 8px 44px; font-size: 0.78rem; color: #444; font-style: italic; border-bottom: 1px solid #1E3A5F; }
+    .empty-note:last-child { border-bottom: none; }
+
+    /* Live tools section */
+    .tools-section { margin-top: 24px; }
+    .tools-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: #8899AA; margin-bottom: 10px; }
+    .tool-link { display: flex; align-items: center; justify-content: space-between; background: #111827; border: 1px solid #1E3A5F; border-left: 3px solid #00FF88; border-radius: 0 6px 6px 0; padding: 10px 16px; margin-bottom: 8px; text-decoration: none; color: #E8F4FD; }
+    .tool-link:hover { border-left-color: #00D4FF; }
+    .tool-name { font-size: 0.88rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .dot-live { width: 8px; height: 8px; border-radius: 50%; background: #00FF88; box-shadow: 0 0 6px #00FF88; flex-shrink: 0; }
+    .tool-url { font-size: 0.72rem; color: #00D4FF; }
+
+    .footer { text-align: center; padding: 20px; font-size: 0.72rem; color: #1E3A5F; border-top: 1px solid #1E3A5F; margin-top: 20px; }
+    .update-note { background: #111827; border: 1px solid #1E3A5F; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 0.82rem; color: #8899AA; }
+    .update-note strong { color: #FFD700; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <h1>Sizzler — Folder Directory</h1>
+    <p>Wave, Road &amp; Everything Between · @sizzlerwaveandroad · Click any folder or file to open</p>
+  </div>
+
+  <div class="body">
+
+    <div class="update-note">
+      <strong>How to use:</strong> Click any folder to open it in OneDrive. Click any file to open it directly. Update this HTML file at the end of each session when new files are added — open in Notepad, add the new file row, save.
+    </div>
+
+    <!-- Root folder -->
+    <a href="https://1drv.ms/f/c/58b0cd7e7aac633d/IgCh-o7c02aERbHYrVopLi_8Aa8sBO09liQqs5mRiMAxlaw?e=O908OQ" target="_blank" class="root-link">
+      <span style="font-size:1.5rem">🗂️</span>
+      <div>
+        <div class="root-name">sizzlerwaveandroad</div>
+        <div class="root-desc">Root folder — OneDrive · C:\Users\kjbis\OneDrive\Documents\sizzlerwaveandroad</div>
+      </div>
+      <span class="open-btn">Open →</span>
+    </a>
+
+    <!-- 01 Foundation -->
+    <div class="folder-section">
+      <a href="https://1drv.ms/f/c/58b0cd7e7aac633d/IgBhihPZ96zDQ52rUCOnXoD7Abi39-tjih7Ia-aaoGk1Zfw?e=NKwhXB" target="_blank" class="folder-header">
+        <div class="folder-num" style="background:#00D4FF">01</div>
+        <div style="flex:1"><div class="folder-name">01_Foundation</div><div class="folder-desc">Final locked documents — the archive</div></div>
+        <span class="open-btn">Open →</span>
+      </a>
+      <div class="file-list">
+        <!-- Archive subfolder -->
+        <a href="https://1drv.ms/f/c/58b0cd7e7aac633d/IgCEHN_8vcq3QpgqEEigbG4KAX81IB6_-GyEM-iJjX9d38c?e=rxz9IS" target="_blank" class="subfolder-header">
+          <span>📁</span><span class="subfolder-name">_Archive/</span><span style="margin-left:8px;font-size:0.72rem">Old versions — never delete</span>
+          <span style="margin-left:auto;font-size:0.7rem;color:#00D4FF;border:1px solid #00D4FF44;padding:2px 6px;border-radius:4px">Open →</span>
+        </a>
+        <a href="https://1drv.ms/w/c/58b0cd7e7aac633d/IQBMiTpZmCo2RK7bVF5LXFKlAe2vaXIq2oOnaNn6tFf-RtE?e=EpNuWW" target="_blank" class="subfolder-file"><span class="file-icon">📄</span>Sizzler_BrandKit_Upgraded-1-1.docx</a>
+        <a href="https://1drv.ms/w/c/58b0cd7e7aac633d/IQBUaWu2T4l9QZOJZ5JVzBd7AYGOvBCaU_0EqnmtzGg4pjs?e=zJRH9w" target="_blank" class="subfolder-file"><span class="file-icon">📄</span>Sizzler_Business_Plan_Business_Description.docx</a>
+        <a href="https://1drv.ms/w/c/58b0cd7e7aac633d/IQDNPksEXlDOQLMf8QgqeS8XAR4s3ZBxpPtZ2jU8mM4mzW0?e=7sPPPb" target="_blank" class="subfolder-file"><span class="file-icon">📄</span>Sizzler_Business_Plan_Executive_Summary.docx</a>
+        <a href="https://1drv.ms/w/c/58b0cd7e7aac633d/IQD9My-G-ts2T693YMFXbiFmAa8UzfMRS4MShJcu34lu8RU?e=G1rzFH" target="_blank" class="subfolder-file"><span class="file-icon">📄</span>Sizzler_Business_Plan_Executive_Summary_v1.1.docx</a>
+        <a href="https://1drv.ms/w/c/58b0cd7e7aac633d/IQDQiy4QDvlKQ6iwwIkxa9rbAW0IMWMqpYO3uPlcXrg2C8I?e=tir6Ek" target="_blank" class="subfolder-file"><span class="file-icon">📄</span>Sizzler_Master_Plan-3.docx</a>
+        <!-- Foundation root files -->
+        <div class="empty-note">Foundation root — documents move here from 02_Drafts when approved</div>
+      </div>
+    </div>
+
+    <!-- 02 Drafts -->
+    <div class="folder-section">
+      <a href="file:///C:/Users/kjbis/Downloads/FolderDirectory.html#" class="folder-header">
+        <div class="folder-num" style="background:#FF6B6B">02</div>
+        <div style="flex:1"><div class="folder-name">02_Drafts</div><div class="folder-desc">Work in progress — everything being developed</div></div>
+        <span class="open-btn">Open →</span>
+      </a>
+      <div class="file-list">
+        <div class="file-item"><span class="file-icon">📄</span><span class="file-name">Sizzler_Master_Plan_v4.docx</span><span class="file-tag" style="background:#0A2A1A;color:#00FF88">Updated</span></div>
+        <div class="file-item"><span class="file-icon">📄</span><span class="file-name">Sizzler_Brain_Dump_Template_v2_0.docx</span><span class="file-tag" style="background:#0A2A1A;color:#00FF88">Updated</span></div>
+        <div class="file-item"><span class="file-icon">📄</span><span class="file-name">Sizzler_Brand_Kit_v2_0.docx</span><span class="file-tag" style="background:#0A2A1A;color:#00FF88">Updated</span></div>
+        <div class="file-item"><span class="file-icon">📄</span><span class="file-name">Sizzler_Brand_Voice_Guide_v2_0.docx</span><span class="file-tag" style="background:#0A2A1A;color:#00FF88">Updated</span></div>
+        <div class="file-item"><span class="file-icon">📄</span><span class="file-name">Sizzler_Business_Description_v2_0.docx</span><span class="file-tag" style="background:#0A2A1A;color:#00FF88">Updated</span></div>
+        <div class="file-item"><span class="file-icon">📄</span><span class="file-name">Sizzler_Executive_Summary_v2_0.docx</span><span class="file-tag" style="background:#0A2A1A;color:#00FF88">Updated</span></div>
+        <div class="file-item"><span class="file-icon">📄</span><span class="file-name">Sizzler_Marketing_Plan_AppendixA_v2_0.docx</span><span class="file-tag" style="background:#0A2A1A;color:#00FF88">Updated</span></div>
+        <div class="file-item"><span class="file-icon">🔗</span><span class="file-name">AgentMap_Shortcut.lnk</span><span class="file-tag" style="background:#2A1A00;color:#FFD700">Shortcut</span></div>
+      </div>
+    </div>
+
+    <!-- 03 Jarvis -->
+    <div class="folder-section">
+      <a href="file:///C:/Users/kjbis/Downloads/FolderDirectory.html#" class="folder-header">
+        <div class="folder-num" style="background:#00FF88">03</div>
+        <div style="flex:1"><div class="folder-name">03_Jarvis</div><div class="folder-desc">Jarvis builds, docs and agents</div></div>
+        <span class="open-btn">Open →</span>
+      </a>
+      <div class="file-list">
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">Docs/</span></div>
+        <div class="subfolder-file"><span class="file-icon">🌐</span>AgentMap.html — Agent connection map v1.0</div>
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">Agents/</span></div>
+        <div class="empty-note">Agent briefs and activation guides — coming soon</div>
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">Builds/</span></div>
+        <div class="subfolder-file"><span class="file-icon">🌐</span>JarvisV3.html — Jarvis V3 dark cockpit</div>
+        <div class="subfolder-file"><span class="file-icon">🌐</span>BuildersLog.html — Builder's Log dark cockpit</div>
+        <div class="subfolder-file"><span class="file-icon">🌐</span>ControlCentre.html — Control Centre dark cockpit</div>
+        <div class="subfolder-file"><span class="file-icon">🌐</span>DailyOperatingGuide.html — Daily guide</div>
+        <div class="subfolder-file"><span class="file-icon">🌐</span>MasterIndex_v2.html — Master navigation index</div>
+        <div class="subfolder-file"><span class="file-icon">🌐</span>README.html — Folder structure guide</div>
+      </div>
+    </div>
+
+    <!-- 04 Content -->
+    <div class="folder-section">
+      <a href="file:///C:/Users/kjbis/Downloads/FolderDirectory.html#" class="folder-header">
+        <div class="folder-num" style="background:#FFD700">04</div>
+        <div style="flex:1"><div class="folder-name">04_Content</div><div class="folder-desc">All media organised by pillar</div></div>
+        <span class="open-btn">Open →</span>
+      </a>
+      <div class="file-list">
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">Media/</span><span style="margin-left:8px;font-size:0.72rem">Raw incoming — drop here first, sort later</span></div>
+        <div class="subfolder-file"><span class="file-icon">🖼️</span>Keith_Logo_for_E-mail.jpg — Aotearoa Ngaru Tinana logo</div>
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">Ocean/</span><span style="margin-left:8px;font-size:0.72rem">🌊 Bodysurfing, NZ beaches, GoPro</span></div>
+        <div class="empty-note">Content coming — Bali June 2026 photos ready to sort</div>
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">Road/</span><span style="margin-left:8px;font-size:0.72rem">🚐 Caravan, nomadic life, NZ travel</span></div>
+        <div class="empty-note">Content coming post-Bali</div>
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">Human/</span><span style="margin-left:8px;font-size:0.72rem">🎨 Personal story, watercolour, reinvention</span></div>
+        <div class="empty-note">Content coming post-Bali</div>
+      </div>
+    </div>
+
+    <!-- 05 Clients -->
+    <div class="folder-section">
+      <a href="file:///C:/Users/kjbis/Downloads/FolderDirectory.html#" class="folder-header">
+        <div class="folder-num" style="background:#48CAE4">05</div>
+        <div style="flex:1"><div class="folder-name">05_Clients</div><div class="folder-desc">Jarvis client projects</div></div>
+        <span class="open-btn">Open →</span>
+      </a>
+      <div class="file-list">
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">Aotearoa_Bodysurfing_NZ/</span><span style="margin-left:8px;font-size:0.72rem">First Jarvis client — NZ bodysurfing org</span></div>
+        <div class="empty-note">Client files coming — brand, social media, strategy</div>
+      </div>
+    </div>
+
+    <!-- 06 Tools -->
+    <div class="folder-section">
+      <a href="file:///C:/Users/kjbis/Downloads/FolderDirectory.html#" class="folder-header">
+        <div class="folder-num" style="background:#F4A261">06</div>
+        <div style="flex:1"><div class="folder-name">06_Tools</div><div class="folder-desc">Business tools and platform references</div></div>
+        <span class="open-btn">Open →</span>
+      </a>
+      <div class="file-list">
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">GitHub/</span><span style="margin-left:8px;font-size:0.72rem">Repo notes and deploy process</span></div>
+        <div class="empty-note">Add deploy notes and repo reference here</div>
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">Vercel/</span><span style="margin-left:8px;font-size:0.72rem">Live URLs and deployment notes</span></div>
+        <div class="empty-note">Add live URLs and deployment notes here</div>
+        <div class="subfolder-header"><span>📁</span><span class="subfolder-name">Business/</span><span style="margin-left:8px;font-size:0.72rem">Canva, Buffer, CapCut references</span></div>
+        <div class="empty-note">Add tool notes and guides here</div>
+      </div>
+    </div>
+
+    <!-- Live tools -->
+    <div class="tools-section">
+      <div class="tools-title">Live Tools — Click to Open</div>
+      <a href="https://sizzler-jarvis-v3.vercel.app/" target="_blank" class="tool-link">
+        <div class="tool-name"><div class="dot-live"></div>Jarvis V3</div>
+        <span class="tool-url">sizzler-jarvis-v3.vercel.app</span>
+      </a>
+      <a href="https://sizzler-builderslog-3zno.vercel.app/" target="_blank" class="tool-link">
+        <div class="tool-name"><div class="dot-live"></div>Builder's Log</div>
+        <span class="tool-url">sizzler-builderslog-3zno.vercel.app</span>
+      </a>
+      <a href="https://sizzler-controlcentre.vercel.app/" target="_blank" class="tool-link">
+        <div class="tool-name"><div class="dot-live"></div>Control Centre</div>
+        <span class="tool-url">sizzler-controlcentre.vercel.app</span>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Sizzler Folder Directory v1.0 · June 2026 · Bali, Indonesia<br>
+    Update this file at end of each session when new files are added · Owner: Siz (Keith Boyd)
+  </div>
+
+</div>
+
+
+</body></html>
